@@ -1,4 +1,3 @@
-import React from "react";
 import DemoPage from "./demo/page";
 
 const Page = () => {
