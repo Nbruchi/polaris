@@ -2,17 +2,18 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Providers from "@/components/providers";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = localFont({
     src: "./fonts/Inter-VF.ttf",
-  variable: "--font-inter",
-    weight:"200 300 400 500 600 700 800 900"
+    variable: "--font-inter",
+    weight: "200 300 400 500 600 700 800 900",
 });
 
 const plexMono = localFont({
     src: "./fonts/JetBrainsMono-VF.ttf",
-  variable: "--font-plex-mono",
-    weight:"300 500 600 700 900"
+    variable: "--font-plex-mono",
+    weight: "300 500 600 700 900",
 });
 
 export const metadata: Metadata = {
@@ -30,7 +31,10 @@ export default function RootLayout({
             <body
                 className={`${inter.variable} ${plexMono.variable} antialiased`}
             >
-                <Providers>{children}</Providers>
+                <Providers>
+                    {children}
+                    <Toaster />
+                </Providers>
             </body>
         </html>
     );
