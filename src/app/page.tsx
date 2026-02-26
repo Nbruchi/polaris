@@ -1,11 +1,7 @@
-import DemoPage from "./demo/page";
+import ProjectsView from "@/features/projects/components/projects-view";
 
-const Page = () => {
-    return (
-        <div>
-            <DemoPage />
-        </div>
-    );
+const Home = () => {
+    return <ProjectsView/>
 };
 
-export default Page;
+export default Home;
