@@ -25,7 +25,7 @@ const ProjectIdLayout = ({
             <Navbar projectId={projectId} />
             <div className="flex-1 flex overflow-hidden">
                 <Allotment
-                    className="flex-1"
+                    className="flex-1 flex"
                     defaultSizes={[
                         DEFAULT_CONVERSATION_SIDEBAR_WIDTH,
                         DEFAULT_MAIN_SIZE,
