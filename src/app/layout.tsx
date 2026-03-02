@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
 import Providers from "@/components/providers";
 import { Toaster } from "@/components/ui/sonner";
+
+import "./globals.css";
+import "allotment/dist/style.css";
 
 const inter = localFont({
     src: "./fonts/Inter-VF.ttf",
