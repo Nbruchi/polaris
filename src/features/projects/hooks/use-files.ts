@@ -28,3 +28,14 @@ export const useDeleteFile = () => {
     return useMutation(api.files.deleteFile);
     // TODO: Add optimistic mutation
 };
+
+export const useFile = (fileId: Id<"files"> | null) =>
+    useQuery(api.files.getFile, fileId ? { id: fileId } : "skip");
+
+export const useFilePath = (fileId: Id<"files"> | null) => {
+    return useQuery(api.files.getFilePath, fileId ? { id: fileId } : "skip");
+};
+
+export const useUpdateFile = () => {
+    return useMutation(api.files.updateFile);
+};
