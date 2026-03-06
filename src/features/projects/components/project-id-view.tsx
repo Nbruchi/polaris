@@ -6,6 +6,7 @@ import { useState } from "react";
 import { FaGithub } from "react-icons/fa";
 import { Allotment } from "allotment";
 import FileExplorer from "./file-explorer";
+import EditorView from "@/features/editor/components/editor-view";
 
 const MIN_SIDEBAR_WIDTH = 200;
 const MAX_SIDEBAR_WIDTH = 800;
@@ -41,14 +42,14 @@ const ProjectIdView = ({ projectId }: { projectId: Id<"projects"> }) => {
         <div className="h-full flex flex-col">
             <nav className="flex h-8.75 items-center bg-sidebar border-b">
                 <Tab
-                    label="Preview"
-                    isActive={activeView === "preview"}
-                    onClick={() => setActiveView("preview")}
-                />
-                <Tab
                     label="Code"
                     isActive={activeView === "editor"}
                     onClick={() => setActiveView("editor")}
+                />
+                <Tab
+                    label="Preview"
+                    isActive={activeView === "preview"}
+                    onClick={() => setActiveView("preview")}
                 />
                 <div className="flex-1 flex justify-end h-full">
                     <div className="flex items-center gap-2 h-full px-3 cursor-pointer text-muted-foreground border-l hover:bg-accent/30">
@@ -79,7 +80,7 @@ const ProjectIdView = ({ projectId }: { projectId: Id<"projects"> }) => {
                             <FileExplorer projectId={projectId} />
                         </Allotment.Pane>
                         <Allotment.Pane>
-                            <div>Editor View</div>
+                            <EditorView projectId={projectId}/>
                         </Allotment.Pane>
                     </Allotment>
                 </div>
