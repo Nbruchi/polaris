@@ -10,6 +10,9 @@ import { getLanguageExtension } from "../extensions/language-extension";
 import { minimap } from "../extensions/minimap";
 import { indentationMarkers } from "@replit/codemirror-indentation-markers";
 import { customSetup } from "../extensions/custom-setup";
+import { suggestion } from "../extensions/suggestion";
+import { quickEdit } from "../extensions/quick-edit";
+import { selectionTooltip } from "../extensions/selection-tooltip";
 
 interface Props {
     fileName: string;
@@ -37,6 +40,9 @@ const CodeEditor = ({ fileName, initialValue = "", onChange }: Props) => {
                 javascript({ typescript: true }),
                 oneDark,
                 customTheme,
+                suggestion(fileName),
+                quickEdit(),
+                selectionTooltip(),
                 minimap(),
                 indentationMarkers(),
                 EditorView.updateListener.of((update) => {
