@@ -7,7 +7,7 @@ import FileBreadcrumbs from "./file-breadcrumbs";
 import { useFile, useUpdateFile } from "@/features/projects/hooks/use-files";
 import Image from "next/image";
 import CodeEditor from "./code-editor";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const DEBOUNCE_MS = 1500;
 
@@ -19,6 +19,14 @@ const EditorView = ({ projectId }: { projectId: Id<"projects"> }) => {
 
     const isActiveFileBinary = activeFile && activeFile.storageId;
     const isActiveFileText = activeFile && !activeFile.storageId;
+
+    useEffect(() => {
+        return () => {
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+        };
+    }, [activeTabId]);
 
     return (
         <div className="h-full flex flex-col">
@@ -48,9 +56,7 @@ const EditorView = ({ projectId }: { projectId: Id<"projects"> }) => {
                                 }}
                             />
                         )}
-                        {isActiveFileBinary && (
-                            <p>Image View</p>
-                        )}
+                        {isActiveFileBinary && <p>Image View</p>}
                     </>
                 ) : (
                     <div className="size-full flex items-center justify-center">
