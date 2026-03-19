@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { google } from "@ai-sdk/google";
+import { anthropic } from "@ai-sdk/anthropic";
 import { NextResponse } from "next/server";
 import { generateText, Output } from "ai";
 import { auth } from "@clerk/nextjs/server";
@@ -81,7 +81,7 @@ export async function POST(request: Request) {
             .replace("{lineNumber}", lineNumber.toString());
 
         const { output } = await generateText({
-            model: google("gemini-2.5-flash"),
+            model: anthropic("claude-3-5-haiku-20241022"),
             output: Output.object({ schema: suggestionSchema }),
             prompt,
         });
