@@ -18,7 +18,7 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const internalKey = process.env.POLARIS_CONVEX_INTERNAL_KEY;
+    const internalKey = process.env.POLARIS_CONVEX_INTERNAL_KEY!;
 
     if (!internalKey) {
         return NextResponse.json(
@@ -44,7 +44,32 @@ export async function POST(request: Request) {
 
     const projectId = conversation.projectId;
 
-    // TODO: Check for processing messages
+    const processingMessages = await convex.query(
+        api.system.getProcessingMessages,
+        {
+            internalKey,
+            projectId,
+        },
+    );
+
+    if (processingMessages.length > 0) {
+        await Promise.all(
+            processingMessages.map(async (message) => {
+                await inngest.send({
+                    name: "message/cancel",
+                    data: {
+                        messageId: message._id,
+                    },
+                });
+
+                await convex.mutation(api.system.updateMessageStatus, {
+                    internalKey,
+                    messageId: message._id,
+                    status: "cancelled",
+                });
+            }),
+        );
+    }
 
     // Create user message
     await convex.mutation(api.system.createMessage, {
@@ -70,6 +95,9 @@ export async function POST(request: Request) {
         name: "message/sent",
         data: {
             messageId: assistantMessageId,
+            conversationId,
+            projectId,
+            message,
         },
     });
 
