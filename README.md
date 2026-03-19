@@ -211,3 +211,5 @@ npm run lint      # Run ESLint
 - [Orchids](https://orchids.app) - Inspiration for the project
 - [shadcn/ui](https://ui.shadcn.com) - UI components
 - [CodeMirror](https://codemirror.net) - Code editor
+
+npx --ignore-scripts=false inngest-cli@latest dev
